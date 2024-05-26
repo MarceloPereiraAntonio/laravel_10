@@ -5,3 +5,9 @@
     <li>{{$data->body}}</li>
     <li>{{$data->status}}</li>
 </ul>
+
+<form action="{{route('forum.destroy', $data->id)}}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button type="submit">Deletar</button>
+</form>
