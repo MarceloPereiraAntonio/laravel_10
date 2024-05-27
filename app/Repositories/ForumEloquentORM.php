@@ -1,0 +1,60 @@
+<?php
+
+use App\DTO\{CreateForumDTO, UpdateForumDTO};
+use App\Models\Forum;
+use App\Repositories\ForumRepositoryInterface;
+use Illuminate\Support\Arr;
+
+class ForumEloquentORM implements ForumRepositoryInterface
+{
+    protected $model;
+    public function __construtc()
+    {
+        $this->model = new Forum();
+    }
+
+    public function getAll(string $filter = null ): array
+    {
+        return $this->model
+                    ->where(function($query) use ($filter){
+                        if($filter){
+                            $query->where('subject', $filter);
+                            $query->orWhere('body', 'like', "%{$filter}%");
+                        }
+                    })
+                    ->all()
+                    ->toArray();
+    }
+
+    public function findOne(string $id): stdClass|null
+    {
+        $forum = $this->model->find($id);
+        if(!$forum){
+            return null;
+        }
+        return (object) $forum->toArray();
+    }
+
+    public function delete(string $id): void
+    {
+        $this->model->findOrFail($id)->delete();
+    }
+
+    public function new(CreateForumDTO $dto): stdClass
+    {
+        $forum = $this->model->create(array(), $dto );
+        return (object) $forum->toArray();
+    }
+
+    public function update(UpdateForumDTO $dto): stdClass|null
+    {
+        if($forum = $this->model->find($dto->id)){
+            return null;
+        }
+
+        $forum->update(array(), $dto);
+
+        return (object) $forum->toArray();
+    }
+
+}

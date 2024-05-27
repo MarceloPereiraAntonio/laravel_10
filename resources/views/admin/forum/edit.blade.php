@@ -1,5 +1,13 @@
 <h1>Editar pergunta</h1>
 
+<ul>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error )
+            <li>{{$error}}</li>
+        @endforeach
+    @endif
+</ul>
+
 <form action="{{route('forum.update', $data->id)}}" method="post">
     @csrf
     @method('PUT')

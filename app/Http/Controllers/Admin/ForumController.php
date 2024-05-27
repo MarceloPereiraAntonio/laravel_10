@@ -2,21 +2,30 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DTO\CreateForumDTO;
+use App\DTO\UpdateForumDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ForumCreateUpdateRequest;
 use App\Models\Forum;
+use App\Services\ForumService;
 use Illuminate\Http\Request;
 
 class ForumController extends Controller
 {
-    public function index(Forum $forum)
+    public function __construct(protected ForumService $service)
     {
-        $data = $forum->all();
+
+    }
+    public function index(Request $request)
+    {
+        $data = $this->service->getAll($request->filter);
+        dd($data);
         return view('admin.forum.index')->with('data', $data);
     }
 
-    public function show(string|int $id, Forum $forum)
+    public function show(string $id)
     {
-        if(!$data = $forum->find($id)){
+        if(!$data = $this->service->findOne($id)){
             return back();
         }
 
@@ -28,42 +37,36 @@ class ForumController extends Controller
         return view('admin.forum.create');
     }
 
-    public function store(Request $request, Forum $forum)
+    public function store(ForumCreateUpdateRequest $request, Forum $forum)
     {
-        $data = $request->all();
-        $data['status'] = 'a';
-        $forum = $forum->create($data);
+        $this->service->new(CreateForumDTO::makeFromRequest($request));
 
         return redirect()->route('forum.index');
     }
 
-    public function edit(string $id, Forum $forum)
+    public function edit(string $id)
     {
 
-        if(!$forum = $forum->where('id', $id)->first()){
+        if(!$forum = $this->service->findOne($id)){
             return back();
         }
 
         return view('admin.forum.edit')->with('data', $forum);
     }
 
-    public function update(Request $request, Forum $forum, string $id)
+    public function update(ForumCreateUpdateRequest $request, Forum $forum, string $id)
     {
-        if(!$forum = $forum->find($id)){
+        $forum = $this->service->update(UpdateForumDTO::makeFromRequest($request));
+        if(!$forum){
             return back();
         }
-        $forum->update($request->only(['subject', 'body']));
         return redirect()->route('forum.index');
 
     }
 
-    public function destroy(string $id, Forum $forum)
+    public function destroy(string $id)
     {
-        if(!$forum = $forum->find($id)){
-            return back();
-        }
-
-        $forum->delete();
+        $this->service->delete($id);
         return redirect()->route('forum.index');
     }
 }
