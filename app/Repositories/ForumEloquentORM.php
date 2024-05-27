@@ -3,7 +3,7 @@
 use App\DTO\{CreateForumDTO, UpdateForumDTO};
 use App\Models\Forum;
 use App\Repositories\ForumRepositoryInterface;
-use Illuminate\Support\Arr;
+
 
 class ForumEloquentORM implements ForumRepositoryInterface
 {
