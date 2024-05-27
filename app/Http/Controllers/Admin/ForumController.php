@@ -19,7 +19,6 @@ class ForumController extends Controller
     public function index(Request $request)
     {
         $data = $this->service->getAll($request->filter);
-        dd($data);
         return view('admin.forum.index')->with('data', $data);
     }
 
@@ -37,7 +36,7 @@ class ForumController extends Controller
         return view('admin.forum.create');
     }
 
-    public function store(ForumCreateUpdateRequest $request, Forum $forum)
+    public function store(ForumCreateUpdateRequest $request)
     {
         $this->service->new(CreateForumDTO::makeFromRequest($request));
 
@@ -54,7 +53,7 @@ class ForumController extends Controller
         return view('admin.forum.edit')->with('data', $forum);
     }
 
-    public function update(ForumCreateUpdateRequest $request, Forum $forum, string $id)
+    public function update(ForumCreateUpdateRequest $request, string $id)
     {
         $forum = $this->service->update(UpdateForumDTO::makeFromRequest($request));
         if(!$forum){

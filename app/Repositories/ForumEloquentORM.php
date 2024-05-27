@@ -1,20 +1,21 @@
 <?php
 
+namespace App\Repositories;
 use App\DTO\{CreateForumDTO, UpdateForumDTO};
 use App\Models\Forum;
 use App\Repositories\ForumRepositoryInterface;
-
+use stdClass;
 
 class ForumEloquentORM implements ForumRepositoryInterface
 {
-    protected $model;
-    public function __construtc()
-    {
-        $this->model = new Forum();
-    }
+
+    public function __construct(protected Forum $model)
+    {}
+
 
     public function getAll(string $filter = null ): array
     {
+
         return $this->model
                     ->where(function($query) use ($filter){
                         if($filter){
@@ -22,7 +23,7 @@ class ForumEloquentORM implements ForumRepositoryInterface
                             $query->orWhere('body', 'like', "%{$filter}%");
                         }
                     })
-                    ->all()
+                    ->get()
                     ->toArray();
     }
 
