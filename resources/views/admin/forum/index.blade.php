@@ -10,11 +10,11 @@
     <tbody>
         @foreach ($data as $item )
             <tr>
-                <td>{{$item->subject}}</td>
-                <td>{{$item->status}}</td>
-                <td>{{$item->body}}</td>
-                <td><a href="{{route('forum.show', $item->id)}}">ir</a></td>
-                <td><a href="{{route('forum.edit', $item->id)}}">editar</a></td>
+                <td>{{$item['subject']}}</td>
+                <td>{{$item['status']}}</td>
+                <td>{{$item['body']}}</td>
+                <td><a href="{{route('forum.show', $item['id'])}}">ir</a></td>
+                <td><a href="{{route('forum.edit', $item['id'])}}">editar</a></td>
             </tr>
         @endforeach
     </tbody>

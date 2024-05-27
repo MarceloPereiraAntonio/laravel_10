@@ -43,17 +43,17 @@ class ForumEloquentORM implements ForumRepositoryInterface
 
     public function new(CreateForumDTO $dto): stdClass
     {
-        $forum = $this->model->create(array(), $dto );
+        $forum = $this->model->create((array) $dto );
         return (object) $forum->toArray();
     }
 
     public function update(UpdateForumDTO $dto): stdClass|null
     {
-        if($forum = $this->model->find($dto->id)){
+        if(!$forum = $this->model->find($dto->id)){
             return null;
         }
 
-        $forum->update(array(), $dto);
+        $forum->update((array) $dto);
 
         return (object) $forum->toArray();
     }
