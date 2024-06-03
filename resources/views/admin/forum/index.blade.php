@@ -8,14 +8,16 @@
         <th>Detalhes</th>
     </thead>
     <tbody>
-        @foreach ($data as $item )
+        @foreach ($data->items() as $item )
             <tr>
-                <td>{{$item['subject']}}</td>
-                <td>{{$item['status']}}</td>
-                <td>{{$item['body']}}</td>
-                <td><a href="{{route('forum.show', $item['id'])}}">ir</a></td>
-                <td><a href="{{route('forum.edit', $item['id'])}}">editar</a></td>
+                <td>{{$item->subject}}</td>
+                <td>{{$item->status}}</td>
+                <td>{{$item->body}}</td>
+                <td><a href="{{route('forum.show', $item->id)}}">ir</a></td>
+                <td><a href="{{route('forum.edit', $item->id)}}">editar</a></td>
             </tr>
         @endforeach
     </tbody>
 </table>
+
+<x-pagination :paginator="$data" :appends="$filters"/>
