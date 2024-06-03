@@ -11,7 +11,7 @@
         @foreach ($data->items() as $item )
             <tr>
                 <td>{{$item->subject}}</td>
-                <td>{{$item->status}}</td>
+                <td>{{getStatusForum($item->status)}}</td>
                 <td>{{$item->body}}</td>
                 <td><a href="{{route('forum.show', $item->id)}}">ir</a></td>
                 <td><a href="{{route('forum.edit', $item->id)}}">editar</a></td>

@@ -1,7 +1,9 @@
 <?php
 
+use App\Enums\ForumStatusEnum;
 use App\Http\Controllers\Admin\{ForumController};
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forum/create', [ForumController::class, 'create'])->name('forum.create');

@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\DTO\{CreateForumDTO, UpdateForumDTO};
+use App\DTO\Supports\{CreateForumDTO, UpdateForumDTO};
 use stdClass;
 
 interface ForumRepositoryInterface

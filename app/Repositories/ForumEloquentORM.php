@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories;
-use App\DTO\{CreateForumDTO, UpdateForumDTO};
+use App\DTO\Supports\{CreateForumDTO, UpdateForumDTO};
 use App\Models\Forum;
 use App\Repositories\ForumRepositoryInterface;
 use stdClass;
