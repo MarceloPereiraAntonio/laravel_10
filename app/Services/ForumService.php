@@ -13,9 +13,13 @@ class ForumService
 
     }
 
-    public function getAll(string $filter = null): array
+    public function getAll(string $filter = null)
     {
         return $this->repository->getAll($filter);
+    }
+    public function paginate(int $page = 1, int $totalPerPage = 15,  string $filter = null)
+    {
+        return $this->repository->paginate(page: $page, totalPerPage: $totalPerPage, filter: $filter);
     }
 
     public function findOne(string $id): stdClass|null
