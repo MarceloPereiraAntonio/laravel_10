@@ -2,11 +2,15 @@
 
 namespace App\DTO\Supports;
 
+use App\Enums\ForumStatusEnum;
 use App\Http\Requests\ForumCreateUpdateRequest;
 
 class CreateForumDTO
 {
-    public function __construct(public string $subject, public string $status, public string $body)
+    public function __construct(
+        public string $subject,
+        public ForumStatusEnum $status,
+        public string $body)
     {
 
     }
@@ -15,7 +19,7 @@ class CreateForumDTO
     {
         return new self(
             $request->subject,
-            'a',
+            ForumStatusEnum::A,
             $request->body
         );
     }
