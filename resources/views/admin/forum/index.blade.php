@@ -1,4 +1,14 @@
-<h1>Lista de duvidas</h1>
+@extends('admin.layout.app')
+
+@section('title', 'Forum')
+
+@section('header')
+
+<h3>Forum <span class="badge rounded-pill text-bg-dark">{{$data->total()}}</span></h3>
+@endsection
+
+@section('content')
+
 <a href="{{route('forum.create')}}">Nova pergunta</a>
 <table>
     <thead>
@@ -21,3 +31,5 @@
 </table>
 
 <x-pagination :paginator="$data" :appends="$filters"/>
+@endsection
+
