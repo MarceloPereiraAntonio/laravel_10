@@ -20,10 +20,9 @@ class ForumController extends Controller
     {
         $data = $this->service->paginate(
                         page: $request->get('page', 1),
-                        totalPerPage: $request->get('per_page', 1),
+                        totalPerPage: $request->get('per_page', 5),
                         filter: $request->filter
                         );
-
         $filters = ['filter' => $request->get('filter', '')];
         return view('admin.forum.index')
                     ->with('data', $data)
