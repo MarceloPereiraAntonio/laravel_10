@@ -77,6 +77,8 @@ class ForumController extends Controller
     public function destroy(string $id)
     {
         $this->service->delete($id);
-        return redirect()->route('forum.index');
+        return redirect()
+                ->route('forum.index')
+                ->with('message', 'Pergunta deletada com sucesso');
     }
 }
