@@ -63,4 +63,5 @@
             </tbody>
         </table>
     </div>
+    <x-pagination :paginator="$data" :appends="$filters"/>
 </div>

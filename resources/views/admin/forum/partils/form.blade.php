@@ -3,6 +3,7 @@
         background-color: #1817171c !important;
     }
 </style>
+<x-alert/>
 @csrf
 <div class="mb-3">
     <label for="subject" class="form-label"><span class="badge text-bg-dark">Assunto</span></label>

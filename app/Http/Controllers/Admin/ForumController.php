@@ -47,7 +47,9 @@ class ForumController extends Controller
     {
         $this->service->new(CreateForumDTO::makeFromRequest($request));
 
-        return redirect()->route('forum.index');
+        return redirect()
+                ->route('forum.index')
+                ->with('message', 'Cadastrado com sucesso !');
     }
 
     public function edit(string $id)
@@ -66,7 +68,9 @@ class ForumController extends Controller
         if(!$forum){
             return back();
         }
-        return redirect()->route('forum.index');
+        return redirect()
+                ->route('forum.index')
+                ->with('message', 'Atualizado com sucesso !');
 
     }
 

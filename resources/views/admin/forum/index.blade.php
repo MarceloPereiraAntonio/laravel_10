@@ -12,5 +12,4 @@
 
 @include('admin.forum.partils.content')
 
-<x-pagination :paginator="$data" :appends="$filters"/>
 @endsection
