@@ -25,7 +25,7 @@ class ForumController extends Controller
         //$response = Forum::paginate();
         $response = $this->service->paginate(
             page: $request->get('page', 1),
-            totalPerPage: $request->get('per_page', 1),
+            totalPerPage: $request->get('per_page', 15),
             filter: $request->filter
         );
         return ApiAdapter::toJson($response);

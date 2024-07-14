@@ -6,7 +6,6 @@ use App\DTO\Supports\CreateForumDTO;
 use App\DTO\Supports\UpdateForumDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ForumCreateUpdateRequest;
-use App\Models\Forum;
 use App\Services\ForumService;
 use Illuminate\Http\Request;
 
