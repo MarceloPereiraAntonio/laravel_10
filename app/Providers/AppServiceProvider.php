@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Forum;
+use App\Observers\ForumObserver;
 use App\Repositories\ForumEloquentORM;
 use App\Repositories\ForumRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -21,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Forum::observe(ForumObserver::class);
     }
 }

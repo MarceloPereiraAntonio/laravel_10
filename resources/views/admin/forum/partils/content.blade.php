@@ -58,7 +58,7 @@
                                 <a href="{{route('forum.edit', $item->id)}}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <a href="{{route('forum.show', $item->id)}}">
+                                <a href="{{route('replies.index', $item->id)}}">
                                     <i class="bi bi-eye"></i>
                                 </a>
                             </div>
