@@ -3,21 +3,18 @@
 namespace App\Services;
 
 use App\DTO\Supports\{CreateForumDTO, UpdateForumDTO};
-use App\Repositories\ForumRepositoryInterface;
+use App\Repositories\Contracts\{ForumRepositoryInterface, PaginationInterface};
 use stdClass;
 
 class ForumService
 {
     public function __construct(protected ForumRepositoryInterface $repository)
-    {
-
-    }
-
+    {}
     public function getAll(string $filter = null)
     {
         return $this->repository->getAll($filter);
     }
-    public function paginate(int $page = 1, int $totalPerPage = 15,  string $filter = null)
+    public function paginate(int $page = 1, int $totalPerPage = 15,  string $filter = null): PaginationInterface
     {
         return $this->repository->paginate(page: $page, totalPerPage: $totalPerPage, filter: $filter);
     }

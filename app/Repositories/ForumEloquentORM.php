@@ -3,7 +3,7 @@
 namespace App\Repositories;
 use App\DTO\Supports\{CreateForumDTO, UpdateForumDTO};
 use App\Models\Forum;
-use App\Repositories\ForumRepositoryInterface;
+use App\Repositories\Contracts\{ForumRepositoryInterface, PaginationInterface};
 use stdClass;
 
 class ForumEloquentORM implements ForumRepositoryInterface

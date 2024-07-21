@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Contracts;
 
 use App\DTO\Supports\{CreateForumDTO, UpdateForumDTO};
+use App\Repositories\Contracts\PaginationInterface;
 use stdClass;
 
 interface ForumRepositoryInterface
