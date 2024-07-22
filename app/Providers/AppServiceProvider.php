@@ -5,7 +5,8 @@ namespace App\Providers;
 use App\Models\Forum;
 use App\Observers\ForumObserver;
 use App\Repositories\ForumEloquentORM;
-use App\Repositories\Contracts\ForumRepositoryInterface;
+use App\Repositories\Contracts\{ForumRepositoryInterface, ReplyRepositoryInterface};
+use App\Repositories\Eloquent\ReplyForumRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(ForumRepositoryInterface::class, ForumEloquentORM::class);
+        $this->app->bind(ReplyRepositoryInterface::class, ReplyForumRepository::class);
     }
 
     /**
