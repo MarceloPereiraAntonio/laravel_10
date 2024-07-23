@@ -14,7 +14,10 @@
             @yield('header')
         </head>
         <div class="content">
-            <x-messages/>
+            <div class="mt-2">
+                <x-messages/>
+            </div>
+
             @yield('content')
 
         </div>

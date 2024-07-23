@@ -13,6 +13,12 @@ class ReplyForum extends Model
 
     protected $table = "replies_forum";
 
+    protected $fillable = [
+        'user_id',
+        'forum_id',
+        'content'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

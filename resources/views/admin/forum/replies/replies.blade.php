@@ -41,17 +41,21 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-2">
-            <div class="col-sm">
-                <textarea class="form-control" name="response" placeholder="Sua resposta..."></textarea>
+        <form action="{{route('replies.store', $data->id)}}" method="post">
+            @csrf
+            <input type="hidden" name="forum_id" value="{{$data->id}}">
+            <div class="row mt-2">
+                <div class="col-sm">
+                    <textarea class="form-control" name="content" placeholder="Sua resposta..."></textarea>
+                </div>
             </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-sm">
-                <button class="btn btn-primary">Enviar</button>
-                <a href="{{redirect()->getUrlGenerator()->previous()}}" type="button" class="btn btn-secondary " >Voltar</a>
+            <div class="row mt-2">
+                <div class="col-sm">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <a href="{{redirect()->getUrlGenerator()->previous()}}" type="button" class="btn btn-secondary " >Voltar</a>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 @endsection
