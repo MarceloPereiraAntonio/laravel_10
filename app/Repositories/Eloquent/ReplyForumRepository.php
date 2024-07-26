@@ -14,8 +14,10 @@ class ReplyForumRepository implements ReplyRepositoryInterface
     {}
     public function getAllByForumId(string $forumId): array
     {
-        $this->model->where('forum_id', $forumId)->get();
-        return [];
+        $replies = $this->model
+                        ->with(['user', 'forum'])
+                        ->where('forum_id', $forumId)->get();
+        return $replies->toArray();
     }
     public function createNew(CreateReplyDTO $dto): stdClass
     {

@@ -17,30 +17,28 @@
         <div class="row">
             <p>Status: <span class="badge text-bg-success">Open</span></p>
             <p>Descrição: {{$data->body}}</p>
-            <div class="col-sm">
-                <div class="card" data-bs-theme="dark">
-                    <div class="card-header">
-                      User
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+        @forelse ($replies as $reply)
+            <div class="row mt-2">
+                <div class="col-sm">
+                    <div class="card" data-bs-theme="dark">
+                        <div class="card-header">
+                            {{$reply['user']['name']}}
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{$reply['content']}}</p>
+                            <div class="d-flex justify-content-sm-between">
+                                <p class="mt-2"><span>{{$reply['created_at']}}</span></p>
+                                <a href="#" class="btn btn-danger align-self-baseline">Deletar</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-sm">
-                <div class="card" data-bs-theme="dark">
-                    <div class="card-header">
-                      User
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-danger">Deletar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @empty
+            <p>No replies</p>
+        @endforelse
+
         <form action="{{route('replies.store', $data->id)}}" method="post">
             @csrf
             <input type="hidden" name="forum_id" value="{{$data->id}}">
