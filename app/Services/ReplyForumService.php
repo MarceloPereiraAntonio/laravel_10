@@ -22,4 +22,9 @@ class ReplyForumService
         return $this->repository->createNew($dto);
     }
 
+    public function delete(string $id): bool
+    {
+        return (bool) $this->repository->delete($id);
+    }
+
 }

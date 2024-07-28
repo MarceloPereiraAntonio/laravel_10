@@ -29,7 +29,11 @@
                             <p class="card-text">{{$reply['content']}}</p>
                             <div class="d-flex justify-content-sm-between">
                                 <p class="mt-2"><span>{{$reply['created_at']}}</span></p>
-                                <a href="#" class="btn btn-danger align-self-baseline">Deletar</a>
+                                <form action="{{route('replies.destroy',[$data->id, $reply['id']])}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger align-self-baseline">Deletar</button>
+                                </form>
                             </div>
                         </div>
                     </div>

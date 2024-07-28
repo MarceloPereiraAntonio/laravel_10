@@ -16,8 +16,9 @@ Route::middleware('auth')->group(function (){
     Route::delete('/forum/destroy/{id}', [ForumController::class, 'destroy'])->name('forum.destroy');
 
     //replies
-    Route::post('/forum/{id}/replies', [ReplyForumController::class, 'store'])->name('replies.store');
     Route::get('/forum/show/{id}/replies', [ReplyForumController::class, 'index'])->name('replies.index');
+    Route::post('/forum/{id}/replies', [ReplyForumController::class, 'store'])->name('replies.store');
+    Route::delete('/forum/{id}/replies/{reply}', [ReplyForumController::class, 'destroy'])->name('replies.destroy');
 });
 Auth::routes();
 Route::get('/', function () {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DTO\Replies\CreateReplyDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreReplyForumRequest;
 use App\Services\ForumService;
 use App\Services\ReplyForumService;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class ReplyForumController extends Controller
                 ->with('replies', $replies);
     }
 
-    public function store(Request $request)
+    public function store(StoreReplyForumRequest $request)
     {
         $this->replyService->createNew(
             CreateReplyDTO::makeFromRequest($request)
@@ -38,5 +39,14 @@ class ReplyForumController extends Controller
         return redirect()
                 ->route('replies.index', $request->forum_id)
                 ->with('message', 'Cadastrado com sucesso !');
+    }
+
+    public function destroy(string $forum_id, string $id)
+    {
+        $this->replyService->delete($id);
+
+        return redirect()
+                ->route('replies.index', $forum_id)
+                ->with('message', 'Resposta deletada com sucesso !');
     }
 }
