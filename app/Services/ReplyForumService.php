@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTO\Replies\CreateReplyDTO;
+use App\Events\ForumReplied;
 use App\Repositories\Contracts\ReplyRepositoryInterface;
 use stdClass;
 
@@ -19,8 +20,9 @@ class ReplyForumService
 
     public function createNew(CreateReplyDTO $dto): stdClass
     {
-        $forum = $this->repository->createNew($dto);
-        return $forum;
+        $reply = $this->repository->createNew($dto);
+        ForumReplied::dispatch($reply);
+        return $reply;
     }
 
     public function delete(string $id): bool

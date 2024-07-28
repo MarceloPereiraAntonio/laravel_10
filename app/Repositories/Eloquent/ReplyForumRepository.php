@@ -27,6 +27,7 @@ class ReplyForumRepository implements ReplyRepositoryInterface
             'forum_id' => $dto->forumId,
             'user_id'  => Auth::user()->id
         ]);
+        $reply = $reply->with('user')->first();
 
         return (object) $reply->toArray();
     }
