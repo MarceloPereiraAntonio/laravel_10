@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\DTO\Supports\{CreateForumDTO, UpdateForumDTO};
 use App\Models\Forum;
 use App\Repositories\Contracts\{ForumRepositoryInterface, PaginationInterface};
+use Illuminate\Support\Facades\Gate;
 use stdClass;
 
 class ForumEloquentORM implements ForumRepositoryInterface
@@ -40,7 +41,7 @@ class ForumEloquentORM implements ForumRepositoryInterface
 
     public function findOne(string $id): stdClass|null
     {
-        $forum = $this->model->find($id);
+        $forum = $this->model->with('user')->find($id);
         if(!$forum){
             return null;
         }
@@ -49,7 +50,11 @@ class ForumEloquentORM implements ForumRepositoryInterface
 
     public function delete(string $id): void
     {
-        $this->model->findOrFail($id)->delete();
+        $forum = $this->model->findOrFail($id);
+        if(Gate::denies('owner', $forum->user->id)){
+            abort('403', 'Not Authorized');
+        }
+        $forum->delete();
     }
 
     public function new(CreateForumDTO $dto): stdClass
@@ -62,6 +67,10 @@ class ForumEloquentORM implements ForumRepositoryInterface
     {
         if(!$forum = $this->model->find($dto->id)){
             return null;
+        }
+
+        if(Gate::denies('owner', $forum->user->id)){
+            abort('403', 'Not Authorized');
         }
 
         $forum->update((array) $dto);

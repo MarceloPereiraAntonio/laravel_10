@@ -19,7 +19,8 @@ class ReplyForumService
 
     public function createNew(CreateReplyDTO $dto): stdClass
     {
-        return $this->repository->createNew($dto);
+        $forum = $this->repository->createNew($dto);
+        return $forum;
     }
 
     public function delete(string $id): bool

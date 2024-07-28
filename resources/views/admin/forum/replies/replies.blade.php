@@ -7,11 +7,13 @@
         <div class="row">
             <div class="col-sm d-flex justify-content-between">
                 <h4>Detalhes da pergunta {{$data->id}}</h4>
-                <form class="align-self-baseline" action="{{route('forum.destroy', $data->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Deletar</button>
-                </form>
+                @can('owner', $data->user['id'])
+                    <form class="align-self-baseline" action="{{route('forum.destroy', $data->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                    </form>
+                @endcan
             </div>
         </div>
         <div class="row">
@@ -29,11 +31,13 @@
                             <p class="card-text">{{$reply['content']}}</p>
                             <div class="d-flex justify-content-sm-between">
                                 <p class="mt-2"><span>{{$reply['created_at']}}</span></p>
-                                <form action="{{route('replies.destroy',[$data->id, $reply['id']])}}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger align-self-baseline">Deletar</button>
-                                </form>
+                                @can('owner', $reply['user']['id'])
+                                    <form action="{{route('replies.destroy',[$data->id, $reply['id']])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger align-self-baseline">Deletar</button>
+                                    </form>
+                                @endcan
                             </div>
                         </div>
                     </div>

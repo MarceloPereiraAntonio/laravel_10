@@ -55,9 +55,11 @@
                         </td>
                         <td >
                             <div class="d-flex justify-content-evenly">
+                                @can('owner', $item->user_id)
                                 <a href="{{route('forum.edit', $item->id)}}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
+                                @endcan
                                 <a href="{{route('replies.index', $item->id)}}">
                                     <i class="bi bi-eye"></i>
                                 </a>

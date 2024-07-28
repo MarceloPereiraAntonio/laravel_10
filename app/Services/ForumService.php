@@ -31,7 +31,7 @@ class ForumService
 
     public function update(UpdateForumDTO $dto): stdClass|null
     {
-       return $this->repository->update($dto);
+        return $this->repository->update($dto);
     }
 
     public function delete(string $id): void
