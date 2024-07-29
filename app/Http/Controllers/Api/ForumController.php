@@ -8,7 +8,6 @@ use App\DTO\Supports\UpdateForumDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ForumCreateUpdateRequest;
 use App\Http\Resources\ForumResource;
-
 use App\Services\ForumService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -38,7 +37,9 @@ class ForumController extends Controller
             CreateForumDTO::makeFromRequest($request)
         );
 
-        return new ForumResource($response);
+        return (new ForumResource($response))
+                        ->response()
+                        ->setStatusCode(Response::HTTP_CREATED);
     }
 
     public function show(string $id)
