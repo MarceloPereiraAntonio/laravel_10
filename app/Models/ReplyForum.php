@@ -21,6 +21,8 @@ class ReplyForum extends Model
         'content'
     ];
 
+    protected $with = ['user'];
+
     public function createdAt(): Attribute
     {
         return Attribute::make(

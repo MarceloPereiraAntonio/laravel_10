@@ -3,6 +3,7 @@
 namespace App\Repositories\Contracts;
 
 use App\DTO\Supports\{CreateForumDTO, UpdateForumDTO};
+use App\Enums\ForumStatusEnum;
 use App\Repositories\Contracts\PaginationInterface;
 use stdClass;
 
@@ -14,4 +15,5 @@ interface ForumRepositoryInterface
     public function delete(string $id): void;
     public function new(CreateForumDTO $dto): stdClass;
     public function update(UpdateForumDTO $dto): stdClass|null;
+    public function updateStatus(string $id, ForumStatusEnum $status): void;
 }

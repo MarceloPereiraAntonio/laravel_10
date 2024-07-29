@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTO\Supports\{CreateForumDTO, UpdateForumDTO};
+use App\Enums\ForumStatusEnum;
 use App\Repositories\Contracts\{ForumRepositoryInterface, PaginationInterface};
 use stdClass;
 
@@ -37,6 +38,11 @@ class ForumService
     public function delete(string $id): void
     {
         $this->repository->delete($id);
+    }
+
+    public function updateStatus(string $id, ForumStatusEnum $status): void
+    {
+        $this->repository->updateStatus($id, $status);
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\DTO\Supports\{CreateForumDTO, UpdateForumDTO};
+use App\Enums\ForumStatusEnum;
 use App\Models\Forum;
 use App\Repositories\Contracts\{ForumRepositoryInterface, PaginationInterface};
 use Illuminate\Support\Facades\Gate;
@@ -16,6 +17,10 @@ class ForumEloquentORM implements ForumRepositoryInterface
     public function paginate(int $page = 1, int $totalPerPage = 15,  string $filter = null): PaginationInterface
     {
         $results = $this->model
+        ->with(['replies' => function($query){
+            $query->limit(4);
+            $query->latest();
+        }])
         ->where(function($query) use ($filter){
             if($filter){
                 $query->where('subject', 'like', "%{$filter}%");
@@ -76,6 +81,16 @@ class ForumEloquentORM implements ForumRepositoryInterface
         $forum->update((array) $dto);
 
         return (object) $forum->toArray();
+    }
+
+    public function updateStatus(string $id, ForumStatusEnum $status): void
+    {
+        $this->model
+            ->where('id', $id)
+            ->update([
+                'status' => $status->name
+        ]);
+
     }
 
 }
