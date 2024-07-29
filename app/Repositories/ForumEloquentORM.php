@@ -17,10 +17,11 @@ class ForumEloquentORM implements ForumRepositoryInterface
     public function paginate(int $page = 1, int $totalPerPage = 15,  string $filter = null): PaginationInterface
     {
         $results = $this->model
-        ->with(['replies' => function($query){
-            $query->limit(4);
-            $query->latest();
-        }])
+        // ->with(['replies' => function($query){
+        //     $query->limit(4);
+        //     $query->latest();
+        // }])
+        ->with('replies.user')
         ->where(function($query) use ($filter){
             if($filter){
                 $query->where('subject', 'like', "%{$filter}%");

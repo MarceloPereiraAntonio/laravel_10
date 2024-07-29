@@ -45,9 +45,11 @@
                         <td>
                             <div class="avatars">
                                 @foreach ($item->replies as $reply)
+                                    @if ($loop->index < 4 )
                                     <span class="avatar">
                                         {{getInitials($reply['user']['name'])}}
                                     </span>
+                                    @endif
                                 @endforeach
                             </div>
                         </td>
